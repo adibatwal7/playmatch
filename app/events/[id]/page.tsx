@@ -71,7 +71,7 @@ export default async function EventDetailPage({
   const isFull = joinedCount >= event.capacity;
 
   const displayDate = new Date(event.date);
-  const imageUrl = "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
+  const imageUrl = event.imageUrl || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
 
   return (
     <div className="min-h-screen pb-40">

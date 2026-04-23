@@ -9,7 +9,8 @@ export const DEMO_EVENTS = [
     price: 12,
     capacity: 10,
     host_id: "demo-host-1",
-    matchPercentage: 98
+    matchPercentage: 98,
+    imageUrl: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-2",
@@ -21,7 +22,8 @@ export const DEMO_EVENTS = [
     price: 0,
     capacity: 20,
     host_id: "demo-host-2",
-    matchPercentage: 95
+    matchPercentage: 95,
+    imageUrl: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-3",
@@ -33,7 +35,8 @@ export const DEMO_EVENTS = [
     price: 15,
     capacity: 4,
     host_id: "demo-host-3",
-    matchPercentage: 92
+    matchPercentage: 92,
+    imageUrl: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-4",
@@ -45,7 +48,8 @@ export const DEMO_EVENTS = [
     price: 5,
     capacity: 12,
     host_id: "demo-host-4",
-    matchPercentage: 88
+    matchPercentage: 88,
+    imageUrl: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-5",
@@ -57,7 +61,8 @@ export const DEMO_EVENTS = [
     price: 0,
     capacity: 16,
     host_id: "demo-host-2",
-    matchPercentage: 97
+    matchPercentage: 97,
+    imageUrl: "https://images.unsplash.com/photo-1592650547661-314fe411a09d?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-6",
@@ -69,7 +74,8 @@ export const DEMO_EVENTS = [
     price: 20,
     capacity: 4,
     host_id: "demo-host-4",
-    matchPercentage: 90
+    matchPercentage: 90,
+    imageUrl: "https://images.unsplash.com/photo-1626084300762-5394ef34764b?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-7",
@@ -81,7 +87,8 @@ export const DEMO_EVENTS = [
     price: 8,
     capacity: 8,
     host_id: "demo-host-1",
-    matchPercentage: 85
+    matchPercentage: 85,
+    imageUrl: "https://images.unsplash.com/photo-1609132718484-ccc305002701?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-8",
@@ -93,7 +100,8 @@ export const DEMO_EVENTS = [
     price: 0,
     capacity: 30,
     host_id: "demo-host-2",
-    matchPercentage: 94
+    matchPercentage: 94,
+    imageUrl: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=800&auto=format&fit=crop"
   },
   {
     id: "demo-9",
@@ -105,7 +113,8 @@ export const DEMO_EVENTS = [
     price: 0,
     capacity: 15,
     host_id: "demo-host-3",
-    matchPercentage: 96
+    matchPercentage: 96,
+    imageUrl: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=800&auto=format&fit=crop"
   }
 ];
 

@@ -13,6 +13,7 @@ interface EventType {
   date: string;
   capacity?: number;
   host_id?: string;
+  imageUrl?: string;
 }
 
 export function EventsGrid({ events, emptyMessage = "No events found." }: { events: EventType[], emptyMessage?: string }) {
@@ -41,7 +42,7 @@ export function EventsGrid({ events, emptyMessage = "No events found." }: { even
             distance="2.5" // Mock distance until geospatial logic is added
             price={event.price === 0 ? "Free" : event.price.toString()}
             date={new Date(event.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}
-            imageUrl="https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=800&auto=format&fit=crop" // Placholder
+            imageUrl={event.imageUrl || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=800&auto=format&fit=crop"} 
           />
         </motion.div>
       ))}
