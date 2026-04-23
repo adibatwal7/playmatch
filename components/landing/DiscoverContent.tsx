@@ -13,6 +13,7 @@ interface EventType {
   title: string;
   sport: string;
   location: string;
+  description?: string;
   price: number;
   date: string;
   capacity?: number;
@@ -22,7 +23,7 @@ interface EventType {
 
 export function DiscoverContent({ initialEvents }: { initialEvents: EventType[] }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeFilter, setActiveFilter] = useState("All Sports");
+  const [activeFilter, setActiveFilter] = useState<string>("All Sports");
 
   const filteredEvents = useMemo(() => {
     let result = [...initialEvents];

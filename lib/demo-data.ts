@@ -5,7 +5,7 @@ export const DEMO_EVENTS = [
     sport: "Football",
     description: "Looking for experienced players for a fast-paced game. Cleats required. No beginners please.",
     location: "Downtown Sports Center",
-    date: new Date(Date.now() + 172800000).toISOString(),
+    date: new Date().toISOString(), // TODAY
     price: 12,
     capacity: 10,
     host_id: "demo-host-1",
@@ -18,7 +18,7 @@ export const DEMO_EVENTS = [
     description: "Start your morning right with a gentle yoga session in the park. Bring your own mat!",
     sport: "Yoga",
     location: "Central Park West",
-    date: new Date(Date.now() + 86400000).toISOString(),
+    date: new Date(Date.now() + 3600000).toISOString(), // TODAY (in 1 hour)
     price: 0,
     capacity: 20,
     host_id: "demo-host-2",
@@ -31,7 +31,7 @@ export const DEMO_EVENTS = [
     description: "Hitting session focused on backhands and serves. Intermediate/Advanced level only.",
     sport: "Tennis",
     location: "Lakeside Courts",
-    date: new Date(Date.now() + 259200000).toISOString(),
+    date: new Date(Date.now() + 86400000).toISOString(), // TOMORROW
     price: 15,
     capacity: 4,
     host_id: "demo-host-3",
@@ -44,7 +44,7 @@ export const DEMO_EVENTS = [
     description: "Casual high-energy basketball under the lights. Winners stay on.",
     sport: "Basketball",
     location: "Underground Gym",
-    date: new Date(Date.now() + 345600000).toISOString(),
+    date: new Date(Date.now() + 172800000).toISOString(), // 2 DAYS
     price: 5,
     capacity: 12,
     host_id: "demo-host-4",
@@ -57,7 +57,7 @@ export const DEMO_EVENTS = [
     description: "Friendly games on the sand followed by drinks at the boardwalk. All levels welcome!",
     sport: "Volleyball",
     location: "Sunset Beach - Court 4",
-    date: new Date(Date.now() + 432000000).toISOString(),
+    date: new Date(Date.now() + 604800000).toISOString(), // NEXT WEEK
     price: 0,
     capacity: 16,
     host_id: "demo-host-2",
@@ -70,7 +70,7 @@ export const DEMO_EVENTS = [
     description: "Learning the basics of Padel? Come join us for a friendly match. We have spare rackets.",
     sport: "Padel",
     location: "Padel Club North",
-    date: new Date(Date.now() + 518400000).toISOString(),
+    date: new Date(Date.now() + 1209600000).toISOString(), // 2 WEEKS
     price: 20,
     capacity: 4,
     host_id: "demo-host-4",
@@ -83,7 +83,7 @@ export const DEMO_EVENTS = [
     description: "Fast-paced tournament style ping pong. Bring your A-game!",
     sport: "Table Tennis",
     location: "Retro Bar & Games",
-    date: new Date(Date.now() + 604800000).toISOString(),
+    date: new Date(Date.now() + 2592000000).toISOString(), // 1 MONTH
     price: 8,
     capacity: 8,
     host_id: "demo-host-1",
@@ -96,7 +96,7 @@ export const DEMO_EVENTS = [
     description: "A steady pace run through the botanical gardens. Coffee afterwards is mandatory!",
     sport: "Running",
     location: "Botanical Gardens Gate",
-    date: new Date(Date.now() + 691200000).toISOString(),
+    date: new Date(Date.now() + 43200000).toISOString(), // TODAY (late)
     price: 0,
     capacity: 30,
     host_id: "demo-host-2",
@@ -109,7 +109,7 @@ export const DEMO_EVENTS = [
     description: "A moderate 3-hour hike up the ridge. Stunning views guaranteed. Bring water and snacks.",
     sport: "Hiking",
     location: "Base Camp Trailhead",
-    date: new Date(Date.now() + 777600000).toISOString(),
+    date: new Date(Date.now() + 172800000).toISOString(), // 2 DAYS
     price: 0,
     capacity: 15,
     host_id: "demo-host-3",
