@@ -33,22 +33,17 @@ export default async function EventDetailPage({
     });
   }
 
-  const isDemo = id.startsWith('demo-');
   let event: any = null;
   let eventError: any = null;
   let host: any = null;
   let attendeesData: any[] = [];
-  
-  // Re-triggering build to resolve Vercel sync issue
 
-  if (isDemo) {
+  if (id.startsWith('demo-')) {
     event = DEMO_EVENTS.find(e => e.id === id);
     host = DEMO_HOSTS[event?.host_id || ""];
-    // Mock attendees: 6 for demo-1, 12 for demo-2, 2 for demo-3
     const counts: Record<string, number> = { 'demo-1': 6, 'demo-2': 12, 'demo-3': 2 };
     attendeesData = Array.from({ length: counts[id] || 0 }).map((_, i) => ({ user_id: `fake-user-${i}` }));
   } else {
-    // Fetch Event Details
     const { data: dbEvent, error: dbEventError } = await supabase
       .from('events')
       .select(`*`)
@@ -59,23 +54,16 @@ export default async function EventDetailPage({
     eventError = dbEventError;
 
     if (event) {
-      const { data: dbHost } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', event.host_id)
-        .single();
+      const { data: dbHost } = await supabase.from('profiles').select('*').eq('id', event.host_id).single();
       host = dbHost;
 
-      const { data: dbAttendees } = await supabase
-        .from('event_attendees')
-        .select('user_id')
-        .eq('event_id', id);
-      attendeesData = dbAttendees;
+      const { data: dbAttendees } = await supabase.from('event_attendees').select('user_id').eq('event_id', id);
+      attendeesData = dbAttendees || [];
     }
   }
 
   if (eventError || !event) {
-    notFound();
+    return notFound();
   }
 
   const joinedCount = attendeesData?.length || 0;
