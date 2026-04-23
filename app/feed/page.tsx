@@ -4,6 +4,7 @@ import { FilterChips } from "@/components/ui/FilterChips";
 import { EventsGrid } from "@/components/ui/EventsGrid";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { createClient } from "@/lib/supabase/server";
+import { DEMO_EVENTS } from "@/lib/demo-data";
 
 export default async function FeedPage() {
   const supabase = await createClient();
@@ -14,7 +15,7 @@ export default async function FeedPage() {
     .select('*')
     .order('date', { ascending: true });
 
-  const safeEvents = events || [];
+  const safeEvents = events && events.length > 0 ? events : DEMO_EVENTS;
 
   return (
     <div className="min-h-screen pb-24">

@@ -1,6 +1,7 @@
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { EventsGrid } from "@/components/ui/EventsGrid";
 import { createClient } from "@/lib/supabase/server";
+import { DEMO_EVENTS } from "@/lib/demo-data";
 
 export async function FeaturedEvents() {
   const supabase = await createClient();
@@ -11,37 +12,7 @@ export async function FeaturedEvents() {
     .order('date', { ascending: true })
     .limit(3);
 
-  const demoEvents = [
-    {
-      id: "demo-1",
-      title: "Intense 5v5 Turf Football",
-      sport: "Football",
-      price: 12,
-      date: new Date(Date.now() + 172800000).toISOString(),
-      location: "Downtown Sports Center",
-      matchPercentage: 98
-    },
-    {
-      id: "demo-2",
-      title: "Sunrise Vinyasa Flow",
-      sport: "Yoga",
-      price: 0,
-      date: new Date(Date.now() + 86400000).toISOString(),
-      location: "Central Park West",
-      matchPercentage: 95
-    },
-    {
-      id: "demo-3",
-      title: "Advanced Tennis Drills",
-      sport: "Tennis",
-      price: 15,
-      date: new Date(Date.now() + 259200000).toISOString(),
-      location: "Lakeside Courts",
-      matchPercentage: 92
-    }
-  ];
-
-  const safeEvents = events && events.length > 0 ? events : demoEvents;
+  const safeEvents = events && events.length > 0 ? events : DEMO_EVENTS.slice(0, 3);
 
   return (
     <SectionWrapper className="py-24">

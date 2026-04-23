@@ -6,6 +6,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { notFound } from "next/navigation";
+import { DEMO_EVENTS, DEMO_HOSTS } from "@/lib/demo-data";
 
 export default async function EventDetailPage({ 
   params,
@@ -32,31 +33,45 @@ export default async function EventDetailPage({
     });
   }
 
-  // Fetch Event Details
-  const { data: event, error: eventError } = await supabase
-    .from('events')
-    .select(`
-      *
-    `)
-    .eq('id', id)
-    .single();
+  const isDemo = id.startsWith('demo-');
+  let event, eventError, host, attendeesData;
+
+  if (isDemo) {
+    event = DEMO_EVENTS.find(e => e.id === id);
+    host = DEMO_HOSTS[event?.host_id || ""];
+    // Mock attendees: 6 for demo-1, 12 for demo-2, 2 for demo-3
+    const counts: Record<string, number> = { 'demo-1': 6, 'demo-2': 12, 'demo-3': 2 };
+    attendeesData = Array.from({ length: counts[id] || 0 }).map((_, i) => ({ user_id: `fake-user-${i}` }));
+  } else {
+    // Fetch Event Details
+    const { data: dbEvent, error: dbEventError } = await supabase
+      .from('events')
+      .select(`*`)
+      .eq('id', id)
+      .single();
+    
+    event = dbEvent;
+    eventError = dbEventError;
+
+    if (event) {
+      const { data: dbHost } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', event.host_id)
+        .single();
+      host = dbHost;
+
+      const { data: dbAttendees } = await supabase
+        .from('event_attendees')
+        .select('user_id')
+        .eq('event_id', id);
+      attendeesData = dbAttendees;
+    }
+  }
 
   if (eventError || !event) {
     notFound();
   }
-
-  // Fetch Host Profile separately to avoid strict Foreign Key inferencing issues initially
-  const { data: host } = await supabase
-    .from('profiles')
-    .select('*')
-    .eq('id', event.host_id)
-    .single();
-
-  // Fetch Attendees
-  const { data: attendeesData } = await supabase
-    .from('event_attendees')
-    .select('user_id')
-    .eq('event_id', id);
 
   const joinedCount = attendeesData?.length || 0;
   const hasJoined = attendeesData?.some(a => a.user_id === user?.id) || false;
@@ -117,7 +132,7 @@ export default async function EventDetailPage({
                    <img src={host?.avatar_url || "https://i.pravatar.cc/150"} alt="Host" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-white">Hosted by {host?.name || "Player"}</p>
+                  <p className="text-base font-bold text-white">Hosted by {host?.full_name || host?.name || "Player"}</p>
                   <p className="text-sm font-medium">Verified Event Creator</p>
                 </div>
               </div>
