@@ -15,7 +15,9 @@ export default async function FeedPage() {
     .select('*')
     .order('date', { ascending: true });
 
-  const safeEvents = events && events.length > 0 ? events : DEMO_EVENTS;
+  const dbEvents = events || [];
+  // Merge real events with demo events to ensure a full feed
+  const safeEvents = [...dbEvents, ...DEMO_EVENTS];
 
   return (
     <div className="min-h-screen pb-24">

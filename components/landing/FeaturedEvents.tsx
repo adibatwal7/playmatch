@@ -12,7 +12,8 @@ export async function FeaturedEvents() {
     .order('date', { ascending: true })
     .limit(3);
 
-  const safeEvents = events && events.length > 0 ? events : DEMO_EVENTS.slice(0, 3);
+  const dbEvents = events || [];
+  const safeEvents = [...dbEvents, ...DEMO_EVENTS].slice(0, 6);
 
   return (
     <SectionWrapper className="py-24">
