@@ -11,7 +11,37 @@ export async function FeaturedEvents() {
     .order('date', { ascending: true })
     .limit(3);
 
-  const safeEvents = events || [];
+  const demoEvents = [
+    {
+      id: "demo-1",
+      title: "Intense 5v5 Turf Football",
+      sport: "Football",
+      price: 12,
+      date: new Date(Date.now() + 172800000).toISOString(),
+      location: "Downtown Sports Center",
+      matchPercentage: 98
+    },
+    {
+      id: "demo-2",
+      title: "Sunrise Vinyasa Flow",
+      sport: "Yoga",
+      price: 0,
+      date: new Date(Date.now() + 86400000).toISOString(),
+      location: "Central Park West",
+      matchPercentage: 95
+    },
+    {
+      id: "demo-3",
+      title: "Advanced Tennis Drills",
+      sport: "Tennis",
+      price: 15,
+      date: new Date(Date.now() + 259200000).toISOString(),
+      location: "Lakeside Courts",
+      matchPercentage: 92
+    }
+  ];
+
+  const safeEvents = events && events.length > 0 ? events : demoEvents;
 
   return (
     <SectionWrapper className="py-24">
