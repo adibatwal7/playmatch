@@ -71,7 +71,22 @@ export default async function EventDetailPage({
   const isFull = joinedCount >= event.capacity;
 
   const displayDate = new Date(event.date);
-  const imageUrl = event.imageUrl || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
+  
+  const SPORT_IMAGES: Record<string, string> = {
+    football: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop",
+    soccer: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?q=80&w=1200&auto=format&fit=crop",
+    basketball: "https://images.unsplash.com/photo-1546519638-68e109498ffc?q=80&w=1200&auto=format&fit=crop",
+    tennis: "https://images.unsplash.com/photo-1595435934249-5df7ed86e1c0?q=80&w=1200&auto=format&fit=crop",
+    yoga: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop",
+    volleyball: "https://images.unsplash.com/photo-1592650547661-314fe411a09d?q=80&w=1200&auto=format&fit=crop",
+    padel: "https://images.unsplash.com/photo-1626084300762-5394ef34764b?q=80&w=1200&auto=format&fit=crop",
+    "table tennis": "https://images.unsplash.com/photo-1609132718484-ccc305002701?q=80&w=1200&auto=format&fit=crop",
+    badminton: "https://images.unsplash.com/photo-1626225967045-9410dd99fa70?q=80&w=1200&auto=format&fit=crop",
+    running: "https://images.unsplash.com/photo-1476480862126-209bfaa8edc8?q=80&w=1200&auto=format&fit=crop",
+    hiking: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1200&auto=format&fit=crop"
+  };
+
+  const imageUrl = event.imageUrl || SPORT_IMAGES[event.sport?.toLowerCase()] || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
 
   return (
     <div className="min-h-screen pb-40">
