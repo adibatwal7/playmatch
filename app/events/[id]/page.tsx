@@ -34,7 +34,10 @@ export default async function EventDetailPage({
   }
 
   const isDemo = id.startsWith('demo-');
-  let event, eventError, host, attendeesData;
+  let event: any = null;
+  let eventError: any = null;
+  let host: any = null;
+  let attendeesData: any[] = [];
 
   if (isDemo) {
     event = DEMO_EVENTS.find(e => e.id === id);
