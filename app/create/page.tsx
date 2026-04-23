@@ -4,13 +4,24 @@ import { Navbar } from "@/components/ui/Navbar";
 import { AnimatedButton } from "@/components/ui/AnimatedButton";
 import { motion } from "framer-motion";
 import { UploadCloud, Calendar, MapPin, Users, DollarSign, Image as ImageIcon } from "lucide-react";
-import { useState } from "react";
+import React, { useState } from "react";
 import { createEvent } from "./actions";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 
 export default function CreateEventPage() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const fileInputRef = React.useRef<HTMLInputElement>(null);
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -54,12 +65,43 @@ export default function CreateEventPage() {
           )}
 
           {/* Image Upload */}
-          <div className="w-full h-48 rounded-2xl border-2 border-dashed border-zinc-700 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-(--color-primary)/50 bg-zinc-900/50 transition-colors group">
-            <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center mb-3 group-hover:bg-(--color-primary)/20 group-hover:text-(--color-primary) transition-colors">
-              <UploadCloud className="w-6 h-6" />
-            </div>
-            <p className="font-bold text-white">Upload Banner Image (Coming Soon)</p>
-            <p className="text-sm text-neutral-500 mt-1">Default image will be used for now</p>
+          <div 
+            onClick={() => fileInputRef.current?.click()}
+            className="w-full h-64 rounded-2xl border-2 border-dashed border-zinc-700 bg-white/5 flex flex-col items-center justify-center cursor-pointer hover:border-(--color-primary)/50 bg-zinc-900/50 transition-colors group relative overflow-hidden"
+          >
+            <input 
+              type="file"
+              name="image"
+              accept="image/*"
+              className="hidden"
+              ref={fileInputRef}
+              onChange={handleImageChange}
+            />
+            
+            {previewUrl ? (
+              <img 
+                src={previewUrl} 
+                alt="Preview" 
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+            ) : (
+              <>
+                <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center mb-3 group-hover:bg-(--color-primary)/20 group-hover:text-(--color-primary) transition-colors">
+                  <UploadCloud className="w-6 h-6" />
+                </div>
+                <p className="font-bold text-white">Upload Banner Image</p>
+                <p className="text-sm text-neutral-500 mt-1">PNG, JPG or WebP (max 5MB)</p>
+              </>
+            )}
+
+            {previewUrl && (
+              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                <p className="text-white font-bold flex items-center gap-2">
+                  <ImageIcon className="w-5 h-5" />
+                  Change Image
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
