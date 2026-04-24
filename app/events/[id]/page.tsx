@@ -86,7 +86,7 @@ export default async function EventDetailPage({
     hiking: "https://images.unsplash.com/photo-1551632811-561732d1e306?q=80&w=1200&auto=format&fit=crop"
   };
 
-  const imageUrl = event.imageUrl || SPORT_IMAGES[event.sport?.toLowerCase()] || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
+  const imageUrl = event.image_url || event.imageUrl || SPORT_IMAGES[event.sport?.toLowerCase()] || "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?q=80&w=1200&auto=format&fit=crop";
 
   return (
     <div className="min-h-screen pb-40">

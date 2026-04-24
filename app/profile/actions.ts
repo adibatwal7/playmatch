@@ -18,7 +18,7 @@ export async function updateProfile(formData: FormData) {
   const { error } = await supabase
     .from('profiles')
     .update({
-      name,
+      full_name: name,
       bio,
       interests
     })

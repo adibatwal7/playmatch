@@ -59,7 +59,7 @@ export async function createEvent(formData: FormData) {
       price,
       capacity,
       host_id: user.id,
-      imageUrl
+      image_url: imageUrl
     })
 
   if (error) {

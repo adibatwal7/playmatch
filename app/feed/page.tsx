@@ -13,7 +13,10 @@ export default async function FeedPage() {
     .select('*')
     .order('date', { ascending: true });
 
-  const dbEvents = events || [];
+  const dbEvents = (events || []).map(ev => ({
+    ...ev,
+    imageUrl: ev.image_url || ev.imageUrl
+  }));
   const safeEvents = [...dbEvents, ...DEMO_EVENTS];
 
   return (

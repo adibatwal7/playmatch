@@ -68,6 +68,7 @@ If the user asks for "free", "no cost", set max_price to 0.`
     // 3. Map Match Percentages
     const enrichedEvents = events?.map(ev => ({
        ...ev,
+       imageUrl: ev.image_url || ev.imageUrl,
        matchPercentage: Math.floor(Math.random() * (99 - 85 + 1)) + 85 // Generate an 85-99% mock match score 
     })) || [];
 
