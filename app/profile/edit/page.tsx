@@ -34,10 +34,14 @@ export default function EditProfilePage() {
     loadProfile();
   }, []);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleAction = async (formData: FormData) => {
     setIsSaving(true);
     setError(null);
-    // Let the server action handle it
+    const result = await updateProfile(formData);
+    if (result?.error) {
+      setError(result.error);
+      setIsSaving(false);
+    }
   };
 
   if (isLoading) {
@@ -69,7 +73,7 @@ export default function EditProfilePage() {
           animate={{ opacity: 1, y: 0 }}
           className="glass p-8 md:p-12 rounded-[2.5rem] border border-zinc-800 bg-black/60 relative overflow-hidden"
         >
-          <form action={updateProfile} onSubmit={handleSubmit} className="space-y-8 relative z-10">
+          <form action={handleAction} className="space-y-8 relative z-10">
             {error && (
               <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
                 {error}
