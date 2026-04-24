@@ -10,7 +10,7 @@ export async function updateProfile(formData: FormData) {
 
   if (!user) return { error: "Not authenticated" }
 
-  const full_name = formData.get('full_name') as string
+  const name = formData.get('name') as string
   const bio = formData.get('bio') as string
   const interestsStr = formData.get('interests') as string
   const interests = interestsStr ? interestsStr.split(',').map(i => i.trim()).filter(i => i !== "") : []
@@ -18,7 +18,7 @@ export async function updateProfile(formData: FormData) {
   const { error } = await supabase
     .from('profiles')
     .update({
-      full_name,
+      name,
       bio,
       interests
     })

@@ -88,9 +88,9 @@ export default function EditProfilePage() {
                   Full Name
                 </label>
                 <input
-                  name="full_name"
+                  name="name"
                   type="text"
-                  defaultValue={profile?.full_name || profile?.name || ""}
+                  defaultValue={profile?.name || profile?.full_name || ""}
                   placeholder="e.g. Alex Rivera"
                   className="w-full bg-zinc-950/50 border border-zinc-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-(--color-primary) focus:ring-1 focus:ring-(--color-primary) transition-all"
                   required
