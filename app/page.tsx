@@ -8,6 +8,7 @@ import { MatchingLogic } from "@/components/landing/MatchingLogic";
 import { Stats } from "@/components/landing/Stats";
 import { CTASection } from "@/components/landing/CTASection";
 import { PersonasShowcase } from "@/components/landing/PersonasShowcase";
+import { MatchmakingPromo } from "@/components/landing/MatchmakingPromo";
 import { Footer } from "@/components/landing/Footer";
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
         <Hero />
         <HowItWorks />
         <FeaturedEvents />
+        <MatchmakingPromo />
         <PersonasShowcase />
         <Features />
         <Testimonials />

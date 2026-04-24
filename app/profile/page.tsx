@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
+import Link from "next/link";
 import { Navbar } from "@/components/ui/Navbar";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { User, Mail, Calendar, Settings, Activity } from "lucide-react";
@@ -70,10 +71,12 @@ export default async function ProfilePage() {
           </div>
           
           <div>
-            <AnimatedButton variant="outline" className="gap-2 border-zinc-700 bg-black/40 hover:bg-black/60">
-              <Settings className="w-4 h-4" />
-              Edit Profile
-            </AnimatedButton>
+            <Link href="/profile/edit">
+              <AnimatedButton variant="outline" className="gap-2 border-zinc-700 bg-black/40 hover:bg-black/60">
+                <Settings className="w-4 h-4" />
+                Edit Profile
+              </AnimatedButton>
+            </Link>
           </div>
         </div>
 
