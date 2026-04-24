@@ -1,9 +1,22 @@
 import { Navbar } from "@/components/ui/Navbar";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { getMatches } from "../profile/actions";
-import { Users, Sparkles, Trophy, Zap, MessageSquare, ArrowRight } from "lucide-react";
+import { Users, Sparkles, Trophy, Zap, ArrowRight, MapPin } from "lucide-react";
 import { AnimatedButton } from "@/components/ui/AnimatedButton";
 import Link from "next/link";
+
+interface Match {
+  id: string;
+  full_name?: string;
+  name?: string;
+  matchPercentage: number;
+  avatar_url?: string;
+  bio?: string;
+  sharedInterests: string[];
+  interests: string[];
+  location?: string;
+  isLocationMatch?: boolean;
+}
 
 export default async function MatchmakingPage() {
   const matches = await getMatches();
@@ -32,7 +45,7 @@ export default async function MatchmakingPage() {
             <div>
               <h3 className="text-2xl font-bold mb-2">No Matches Found Yet</h3>
               <p className="text-neutral-500 max-w-md mx-auto">
-                Update your profile with sports interests like "Football" or "Tennis" to start seeing potential teammates.
+                Update your profile with sports interests like &quot;Football&quot; or &quot;Tennis&quot; to start seeing potential teammates.
               </p>
             </div>
             <Link href="/profile/edit">
@@ -41,7 +54,7 @@ export default async function MatchmakingPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {matches.map((match: any) => (
+            {matches.map((match: Match) => (
               <div 
                 key={match.id}
                 className="group glass p-8 rounded-[2.5rem] border border-zinc-800 bg-zinc-900/40 hover:bg-zinc-800/60 hover:border-(--color-primary)/30 transition-all duration-500 relative overflow-hidden"
@@ -64,7 +77,13 @@ export default async function MatchmakingPage() {
                       <h3 className="text-xl font-bold text-white group-hover:text-(--color-primary) transition-colors">
                         {match.full_name || match.name || "Anonymous Player"}
                       </h3>
-                      <p className="text-sm text-neutral-500 font-medium">Player since 2024</p>
+                      {match.location && (
+                        <p className="text-sm text-neutral-400 font-medium flex items-center gap-1 mt-1">
+                          <MapPin className="w-3 h-3" />
+                          {match.location}
+                        </p>
+                      )}
+                      <p className="text-xs text-neutral-500 font-medium mt-1">Player since 2024</p>
                     </div>
                   </div>
 
@@ -84,6 +103,11 @@ export default async function MatchmakingPage() {
                     {match.interests?.length > match.sharedInterests.length && (
                       <span className="px-3 py-1 rounded-lg bg-zinc-950/50 border border-zinc-800 text-[10px] font-black uppercase tracking-widest text-neutral-600">
                         +{match.interests.length - match.sharedInterests.length} more
+                      </span>
+                    )}
+                    {match.isLocationMatch && (
+                      <span className="px-3 py-1 rounded-lg bg-(--color-primary)/10 border border-(--color-primary)/20 text-[10px] font-black uppercase tracking-widest text-(--color-primary)">
+                        Location Match
                       </span>
                     )}
                   </div>

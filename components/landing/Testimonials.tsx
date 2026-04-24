@@ -27,7 +27,7 @@ export function Testimonials() {
     <SectionWrapper className="py-24 overflow-hidden">
       <div className="text-center mb-16">
         <h2 className="text-4xl md:text-5xl font-black mb-4">Players Love Us</h2>
-        <p className="text-xl text-neutral-400">Don't just take our word for it.</p>
+        <p className="text-xl text-neutral-400">Don&apos;t just take our word for it.</p>
       </div>
 
       <div className="flex gap-6 pb-8 overflow-x-auto snap-x scrollbar-hide md:grid md:grid-cols-3">

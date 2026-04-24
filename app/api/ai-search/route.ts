@@ -78,8 +78,8 @@ If the user asks for "free", "no cost", set max_price to 0.`
       parameters: parsedContext
     });
 
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("AI Route Error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
 }

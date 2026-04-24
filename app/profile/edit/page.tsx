@@ -4,14 +4,22 @@ import { Navbar } from "@/components/ui/Navbar";
 import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { AnimatedButton } from "@/components/ui/AnimatedButton";
 import { motion } from "framer-motion";
-import { User, Mail, Tag, AlignLeft, Save, ArrowLeft } from "lucide-react";
+import { User, Mail, Tag, AlignLeft, Save, ArrowLeft, MapPin } from "lucide-react";
 import { useState, useEffect } from "react";
 import { updateProfile } from "../actions";
 import { createClient } from "@/lib/supabase/client";
 import Link from "next/link";
 
+interface UserProfile {
+  name?: string;
+  full_name?: string;
+  bio?: string;
+  interests?: string[];
+  location?: string;
+}
+
 export default function EditProfilePage() {
-  const [profile, setProfile] = useState<any>(null);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -126,6 +134,22 @@ export default function EditProfilePage() {
                   className="w-full bg-zinc-950/50 border border-zinc-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-(--color-primary) focus:ring-1 focus:ring-(--color-primary) transition-all"
                 />
                 <p className="text-xs text-neutral-500">Separating sports with commas helps our matching algorithm find your teammates.</p>
+              </div>
+
+              {/* Location */}
+              <div className="space-y-3">
+                <label className="text-sm font-bold text-neutral-400 uppercase tracking-widest flex items-center gap-2">
+                  <MapPin className="w-4 h-4 text-(--color-primary)" />
+                  Location
+                </label>
+                <input
+                  name="location"
+                  type="text"
+                  defaultValue={profile?.location as string || ""}
+                  placeholder="e.g. New York, London, Tokyo"
+                  className="w-full bg-zinc-950/50 border border-zinc-800 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-(--color-primary) focus:ring-1 focus:ring-(--color-primary) transition-all"
+                />
+                <p className="text-xs text-neutral-500">Add your location to find matches near you.</p>
               </div>
             </div>
 

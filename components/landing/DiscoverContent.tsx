@@ -70,7 +70,7 @@ export function DiscoverContent({ initialEvents }: { initialEvents: EventType[] 
         const outdoorKeywords = ["outdoor", "park", "beach", "turf", "field", "court"];
         result = result.filter(e => 
           outdoorKeywords.some(k => e.location.toLowerCase().includes(k)) ||
-          outdoorKeywords.some(k => (e as any).description?.toLowerCase().includes(k))
+          outdoorKeywords.some(k => e.description?.toLowerCase().includes(k))
         );
         break;
     }

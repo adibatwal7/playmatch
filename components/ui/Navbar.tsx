@@ -8,10 +8,11 @@ import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 import { logout } from "@/app/login/actions";
+import { type User as SupabaseUser } from "@supabase/supabase-js";
 
 export function Navbar() {
   const pathname = usePathname();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<SupabaseUser | null>(null);
   const supabase = createClient();
 
   useEffect(() => {

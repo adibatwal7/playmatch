@@ -4,7 +4,8 @@ import Stripe from "stripe";
 // Initialize Stripe gracefully, avoiding breaking builds if the key isn't provided yet.
 const stripeApiKey = process.env.STRIPE_SECRET_KEY || "empty";
 const stripe = new Stripe(stripeApiKey, {
-  apiVersion: "2024-06-20" as any, // Standardize API version
+  // @ts-expect-error - Standardize API version
+  apiVersion: "2024-06-20",
 });
 
 export async function POST(request: Request) {
@@ -50,8 +51,8 @@ export async function POST(request: Request) {
     });
 
     return NextResponse.json({ url: session.url });
-  } catch (err: any) {
+  } catch (err: unknown) {
     console.error("Stripe Checkout Error:", err);
-    return NextResponse.json({ error: err.message }, { status: 500 });
+    return NextResponse.json({ error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
 }

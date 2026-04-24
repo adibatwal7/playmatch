@@ -41,11 +41,22 @@ const MOCK_RESULTS = [
   }
 ];
 
+interface EventResult {
+  id: string;
+  title: string;
+  sport: string;
+  distance?: string;
+  price: number | string;
+  date: string;
+  imageUrl?: string;
+  matchPercentage?: number;
+}
+
 export default function AISearchPage() {
   const [query, setQuery] = useState("");
   const [searched, setSearched] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<EventResult[]>([]);
 
   const handleSearch = async (e?: React.FormEvent, directQuery?: string) => {
     if (e) e.preventDefault();

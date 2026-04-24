@@ -118,7 +118,7 @@ export const DEMO_EVENTS = [
   }
 ];
 
-export const DEMO_HOSTS: Record<string, any> = {
+export const DEMO_HOSTS: Record<string, { full_name: string; avatar_url: string; bio: string }> = {
   "demo-host-1": {
     full_name: "Marcus Chen",
     avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marcus",

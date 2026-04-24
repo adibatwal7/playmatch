@@ -8,6 +8,32 @@ import { SectionWrapper } from "@/components/ui/SectionWrapper";
 import { notFound } from "next/navigation";
 import { DEMO_EVENTS, DEMO_HOSTS } from "@/lib/demo-data";
 
+interface EventData {
+  id: string;
+  title: string;
+  sport: string;
+  location: string;
+  date: string;
+  capacity: number;
+  host_id: string;
+  image_url?: string;
+  imageUrl?: string;
+  price: number;
+  description?: string;
+  matchPercentage?: number;
+}
+
+interface HostData {
+  id?: string;
+  full_name?: string;
+  name?: string;
+  avatar_url?: string;
+}
+
+interface Attendee {
+  user_id: string;
+}
+
 export default async function EventDetailPage({ 
   params,
   searchParams 
@@ -33,13 +59,13 @@ export default async function EventDetailPage({
     });
   }
 
-  let event: any = null;
-  let eventError: any = null;
-  let host: any = null;
-  let attendeesData: any[] = [];
+  let event: EventData | null = null;
+  let eventError: unknown = null;
+  let host: HostData | null = null;
+  let attendeesData: Attendee[] = [];
 
   if (id.startsWith('demo-')) {
-    event = DEMO_EVENTS.find(e => e.id === id);
+    event = DEMO_EVENTS.find(e => e.id === id) || null;
     host = DEMO_HOSTS[event?.host_id || ""];
     const counts: Record<string, number> = { 'demo-1': 6, 'demo-2': 12, 'demo-3': 2 };
     attendeesData = Array.from({ length: counts[id] || 0 }).map((_, i) => ({ user_id: `fake-user-${i}` }));
